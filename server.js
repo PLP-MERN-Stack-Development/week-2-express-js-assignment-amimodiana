@@ -46,8 +46,19 @@ app.get('/', (req, res) => {
 });
 
 // TODO: Implement the following routes:
+
 // GET /api/products - Get all products
 // GET /api/products/:id - Get a specific product
+app.get('/api/products/:id', (req, res) => {
+  const productId = req.params.id;
+  const product = products.find(p => p.id == productId);
+  
+  if (product) {
+    res.json(product);
+  } else {
+    res.status(404).json({ message: 'Product not found' });
+  }
+});
 // POST /api/products - Create a new product
 // PUT /api/products/:id - Update a product
 // DELETE /api/products/:id - Delete a product
